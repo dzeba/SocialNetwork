@@ -3,22 +3,6 @@
     grid-template-columns: 4fr 8fr;
 }
 
-.dialog_items {
-
-}
-
 .dialog_items .active{
     color: gold;
-}
-
-.dialog {
-
-}
-
-.messages {
-
-}
-
-.message {
-
 }
