@@ -1,11 +1,11 @@
 
 import './index.css';
-import state, {subscribe} from "./redux/state";
+import state, {subscribe} from "./redux/store";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store from "./redux/state"
+import store from "./redux/store"
 import reportWebVitals from "./reportWebVitals";
 
 
@@ -13,10 +13,8 @@ let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={state}
-                 addPost={store.addPost.bind(store)}
-                 addMessage={store.addMessage.bind(store)}
-                 updateNewPostText={store.updateNewPostText.bind(store)}
-                 updateNewMessageText = {store.updateNewMessageText.bind(store)}
+                 dispatch={store.dispatch.bind(store)}
+
             />
 
         </React.StrictMode>,
