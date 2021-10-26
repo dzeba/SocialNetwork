@@ -1,0 +1,28 @@
+.usersPage{
+    display: grid;
+    grid-template-areas:
+  "n c";
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.leftSide{
+    grid-area: n;
+}
+
+.leftSide img{
+    width: 100px;
+    height: 100px;
+
+}
+.leftSide button{
+    width: 100px;
+}
+.rightSide{
+    grid-area: c;
+    width: 80%;
+    font-size: 20px;
+}
+.location{
+    text-align: right;
+}
