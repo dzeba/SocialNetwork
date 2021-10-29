@@ -26,3 +26,9 @@
 .location{
     text-align: right;
 }
+.selectedPage{
+    font-weight: bold;
+}
+.preloader{
+    position: absolute;
+}

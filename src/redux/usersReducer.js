@@ -1,54 +1,19 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const CURRENT_PAGE= 'CURRENT_PAGE'
+const  USERS_COUNT = 'USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS ='TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState = {
-    users: [
-        {
-            id: 1,
-            photoUrl:'https://cdn.maximonline.ru/0a/dd/68/0add6885352bd545197842b6b82ba44a/728x728_1_4ab39e35ca1d60eb8fac6ccf337c8083@1024x1024_0xac120002_17152158281550233735.jpg',
-            followed: true,
-            fullName: 'Vasyl Dzeba',
-            status: 'I am a boss',
-            location:{
-                city: 'Ivano-Frankivsk',
-                country: 'Ukraine'
-            }
-        },
-        {
-            id: 2,
-            photoUrl:'https://bigpicture.ru/wp-content/uploads/2019/04/grandbeauty00.jpg',
-            followed: false,
-            fullName: 'Vova Yakimechko',
-            status: 'Somebody',
-            location:{
-                city: 'Ternopil',
-                country: 'Ukraine'
-            }
-        },
-        {
-            id: 3,
-            photoUrl:'https://the-steppe.com/pictures/files/Alua%20Shymkent/WhatsApp%20Image%202019-09-06%20at%2010.37.49.jpeg',
-            followed: true,
-            fullName: 'Vitaly Chorniy',
-            status: 'Make more money',
-            location:{
-                city: 'Rom',
-                country: 'Italy'
-            }
-        },
-        {
-            id: 4,
-            photoUrl:'https://cdnimg.rg.ru/img/content/132/44/35/vliianie_kofe_d_850.jpg',
-            followed: false,
-            fullName: 'Yana Fedorak',
-            status: 'My Girl',
-            location:{
-                city: 'Yasen',
-                country: 'Ukraine'
-            }
-        },
-    ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    followingInProgress: []
+
 }
 
 const usersReducer = (state = initialState, action) =>{
@@ -82,8 +47,31 @@ const usersReducer = (state = initialState, action) =>{
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users ]
+                users: [...action.users]
             }
+        case CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
+            }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
+
 
         default:
             return state;
@@ -91,22 +79,48 @@ const usersReducer = (state = initialState, action) =>{
 
 }
 
-export const followAC = (userId) => ({
+export const follow = (userId) => ({
     type: FOLLOW,
     userId
 })
 
-export const unfollowAC = (userId) =>{
+export const unfollow = (userId) =>{
     return{
         type: UNFOLLOW,
         userId
     }
 }
-export const setUsersAC = (users) =>{
+export const setUsers = (users) =>{
     return{
         type: SET_USERS,
         users
     }
 }
+export const setCurrentPage = (currentPage) =>{
+    return{
+        type: CURRENT_PAGE,
+        currentPage
+    }
+}
+export const setTotalUsersCount = (totalUsersCount) =>{
+    return{
+        type: USERS_COUNT,
+        totalUsersCount
+    }
+}
+export const toggleIsFetching = (isFetching) =>{
+    return{
+        type: TOGGLE_IS_FETCHING,
+        isFetching
+    }
+}
+export const toggleFollowingProgress = (isFetching,userId ) =>{
+    return{
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        userId,
+        isFetching
+    }
+}
+
 
 export default usersReducer;
