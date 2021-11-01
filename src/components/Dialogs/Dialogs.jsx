@@ -2,7 +2,24 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+
+const maxLength10 = maxLengthCreator(10)
+
+const AddMessageForm = (props) =>{
+    return <div>
+        <form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name={'newMessageBody'}
+                   placeholder={'Enter your message'} validate={[required,maxLength10]} />
+            <button>Send</button>
+
+        </form>
+    </div>
+}
+
+const AddMessageFormRedux = reduxForm ({form: 'dialogAddMessageForm'})(AddMessageForm)
 
 const Dialogs = (props) => {
 
@@ -17,18 +34,10 @@ const Dialogs = (props) => {
             <Message message={message.message}/>
         )
 
-    let newMessageElement = React.createRef();
-
-    let onSendMessageClick = () =>{
-        props.sendMessage();
+    const onSubmit = (values) =>{
+        props.sendMessage(values.newMessageBody);
     }
 
-    let onNewMessageChange =() =>{
-        let text = newMessageElement.current.value;
-        props.updateNewMessageBody(text)
-    }
-
-    if (!props.isAuth) return <Redirect to={'/login'} />
     return (
         <div className={s.dialogs}>
             <div>
@@ -36,11 +45,9 @@ const Dialogs = (props) => {
             </div>
             <div>
                 {messageElements}
-                <textarea onChange={onNewMessageChange}
-                          ref={newMessageElement}
-                          value={props.newMessageText}
+
+                <AddMessageFormRedux onSubmit ={onSubmit}
                 />
-                <button onClick={onSendMessageClick}>Send</button>
             </div>
         </div>
     )
