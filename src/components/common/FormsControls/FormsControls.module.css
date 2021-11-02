@@ -9,3 +9,10 @@
 .error span{
     color: red;
 }
+.formSummaryError{
+    color: red;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+
+}
