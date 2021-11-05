@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/SocialNetwork/static/css/main.0584f0f2.chunk.css",
+    "main.js": "/SocialNetwork/static/js/main.84c3d71f.chunk.js",
+    "main.js.map": "/SocialNetwork/static/js/main.84c3d71f.chunk.js.map",
+    "runtime-main.js": "/SocialNetwork/static/js/runtime-main.1993e990.js",
+    "runtime-main.js.map": "/SocialNetwork/static/js/runtime-main.1993e990.js.map",
+    "static/js/2.e63aa12d.chunk.js": "/SocialNetwork/static/js/2.e63aa12d.chunk.js",
+    "static/js/2.e63aa12d.chunk.js.map": "/SocialNetwork/static/js/2.e63aa12d.chunk.js.map",
+    "static/js/3.b3ccd9a8.chunk.js": "/SocialNetwork/static/js/3.b3ccd9a8.chunk.js",
+    "static/js/3.b3ccd9a8.chunk.js.map": "/SocialNetwork/static/js/3.b3ccd9a8.chunk.js.map",
+    "index.html": "/SocialNetwork/index.html",
+    "static/css/main.0584f0f2.chunk.css.map": "/SocialNetwork/static/css/main.0584f0f2.chunk.css.map",
+    "static/js/2.e63aa12d.chunk.js.LICENSE.txt": "/SocialNetwork/static/js/2.e63aa12d.chunk.js.LICENSE.txt",
+    "static/media/Spinner.5cc945e4.svg": "/SocialNetwork/static/media/Spinner.5cc945e4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1993e990.js",
+    "static/js/2.e63aa12d.chunk.js",
+    "static/css/main.0584f0f2.chunk.css",
+    "static/js/main.84c3d71f.chunk.js"
+  ]
+}
