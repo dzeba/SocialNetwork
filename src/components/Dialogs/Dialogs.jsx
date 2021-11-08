@@ -4,9 +4,9 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormsControls";
-import {maxLengthCreator} from "../../utils/validators/validators";
 
-const maxLength200 = maxLengthCreator(200)
+
+
 
 const AddMessageForm = (props) =>{
     return <div>

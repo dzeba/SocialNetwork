@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {getUserProfile, SavePhoto, setProfileInformation} from "../../../redux/profileReducer";
 import Preloader from "../../common/Preloader/Preloader";
 import UpdateProfileInfo from "./UpdateProfileInfo";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 
 
@@ -33,8 +35,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {
+export default compose
+(connect(mapStateToProps, {
     setProfileInformation,
     SavePhoto,
-    getUserProfile,
-})(UpdateProfileInfoContainer);
+    getUserProfile}),
+withAuthRedirect)
+(UpdateProfileInfoContainer);

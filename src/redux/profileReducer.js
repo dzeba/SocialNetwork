@@ -4,7 +4,6 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
-const UPDATE_PROFILE_INFORMATION = 'UPDATE_PROFILE_INFORMATION'
 const TOGGLE_IS_DONE = 'TOGGLE_IS_DONE'
 const SET_USER_PHOTO ='SET_USER_PHOTO'
 
@@ -21,10 +20,6 @@ let initialState = {
     ],
     profile: null,
     status: '',
-    lookingForAJob: false,
-    aboutMe: null,
-    fullName: null,
-    lookingForAJobDescription: null,
     isDone: false
 }
 
@@ -47,18 +42,7 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             };
-        // case UPDATE_PROFILE_INFORMATION:
-        //
-        //     return {
-        //         ...state,
-        //         profile: {
-        //             ...state.profile,
-        //             aboutMe: action.payload.aboutMe,
-        //             lookingForAJobDescription: action.payload.lookingForAJobDescription,
-        //             fullName: action.payload.fullName,
-        //             lookingForAJob: action.payload.lookingForAJob,
-        //         }
-        //     };
+
         case SET_USER_PHOTO:
 
             return {
@@ -94,15 +78,7 @@ export const setUserPhoto = (photos) => ({
     photos
 })
 
-// export const updateProfileInformation = (payload) => ({
-//     type: UPDATE_PROFILE_INFORMATION,
-//     payload: {
-//         aboutMe: payload.aboutMe,
-//         lookingForAJobDescription: payload.lookingForAJobDescription,
-//         fullName: payload.fullName,
-//         lookingForAJob: payload.lookingForAJob,
-//     }
-// })
+
 export const toggleIsDone = (isDone) => {
     return {
         type: TOGGLE_IS_DONE,

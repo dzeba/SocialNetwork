@@ -12,8 +12,6 @@ import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import UpdateProfileInfoContainer from "./components/Profile/UpdateProfileInfo/UpdateProfileInfoContainer";
 
-
-
 class App extends Component {
     componentDidMount() {
         this.props.initializeApp()
@@ -22,9 +20,7 @@ class App extends Component {
         if(!this.props.initialized) {
             return <Preloader/>
         }
-
         return (
-
                 <div className="App">
                     <HeaderContainer/>
                     <Navbar/>
@@ -46,7 +42,6 @@ class App extends Component {
                         }/>
                     </div>
                 </div>
-
         );
     }
 }

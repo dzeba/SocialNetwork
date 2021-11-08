@@ -35,7 +35,7 @@ const ProfileData = (props) => {
         </div>
         <div>
             <b>Ищу ли я работу:</b> {props.profile.lookingForAJob ? 'Да' : 'Нет'}
-        < /div>
+        </div>
         {props.profile.lookingForAJob &&
         <div>
             <b>Мои скилы:</b> {props.profile.lookingForAJobDescription}
