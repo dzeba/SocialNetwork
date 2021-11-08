@@ -1,5 +1,5 @@
 import React from "react";
-
+import s from './ProfileInfo.module.css'
 
 class ProfileStatus extends React.Component {
     state = {
@@ -18,7 +18,6 @@ class ProfileStatus extends React.Component {
             editMode: false
         })
         this.props.updateStatus(this.state.status);
-
     }
     onStatusChange = (e)=>{
         this.setState({
@@ -45,7 +44,7 @@ class ProfileStatus extends React.Component {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode}
+                        <input className={s.statusInput} onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode}
                                value={this.state.status}/>
 
                     </div>

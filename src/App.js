@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom";
+import { Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -8,10 +8,10 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {Component} from "react";
 import {connect} from "react-redux";
-
 import {initializeApp} from "./redux/appReducer";
-import Profile from "./components/Profile/Profile";
 import Preloader from "./components/common/Preloader/Preloader";
+import UpdateProfileInfoContainer from "./components/Profile/UpdateProfileInfo/UpdateProfileInfoContainer";
+
 
 
 class App extends Component {
@@ -22,8 +22,9 @@ class App extends Component {
         if(!this.props.initialized) {
             return <Preloader/>
         }
+
         return (
-            <BrowserRouter>
+
                 <div className="App">
                     <HeaderContainer/>
                     <Navbar/>
@@ -40,9 +41,12 @@ class App extends Component {
                         <Route path='/login' render={() =>
                             <Login/>
                         }/>
+                        <Route path='/updateInfo' render={() =>
+                            <UpdateProfileInfoContainer/>
+                        }/>
                     </div>
                 </div>
-            </BrowserRouter>
+
         );
     }
 }

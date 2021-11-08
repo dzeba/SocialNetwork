@@ -1,8 +1,12 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
+
 
 const ADD_POST = 'ADD-POST'
-const SET_USER_PROFILE ='SET_USER_PROFILE'
-const SET_USER_STATUS ='SET_USER_STATUS'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_USER_STATUS = 'SET_USER_STATUS'
+const UPDATE_PROFILE_INFORMATION = 'UPDATE_PROFILE_INFORMATION'
+const TOGGLE_IS_DONE = 'TOGGLE_IS_DONE'
+const SET_USER_PHOTO ='SET_USER_PHOTO'
 
 let initialState = {
     posts: [
@@ -16,11 +20,16 @@ let initialState = {
         }
     ],
     profile: null,
-    status: ''
+    status: '',
+    lookingForAJob: false,
+    aboutMe: null,
+    fullName: null,
+    lookingForAJobDescription: null,
+    isDone: false
 }
 
-const profileReducer = (state = initialState, action) =>{
-    switch (action.type){
+const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
         case ADD_POST:
             return {
                 ...state,
@@ -38,6 +47,29 @@ const profileReducer = (state = initialState, action) =>{
                 ...state,
                 status: action.status
             };
+        // case UPDATE_PROFILE_INFORMATION:
+        //
+        //     return {
+        //         ...state,
+        //         profile: {
+        //             ...state.profile,
+        //             aboutMe: action.payload.aboutMe,
+        //             lookingForAJobDescription: action.payload.lookingForAJobDescription,
+        //             fullName: action.payload.fullName,
+        //             lookingForAJob: action.payload.lookingForAJob,
+        //         }
+        //     };
+        case SET_USER_PHOTO:
+
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.photos}
+            };
+        case TOGGLE_IS_DONE:
+            return {
+                ...state,
+                isDone: action.isDone
+            }
         default:
             return state;
     }
@@ -49,45 +81,74 @@ export const addPostActionCreator = (postText) => ({
     postText
 })
 
-export const setUserProfile = (profile) => ({ // це
+export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     profile
 })
-export const setUserStatus = (status) => ({ // це
+export const setUserStatus = (status) => ({
     type: SET_USER_STATUS,
     status
 })
+export const setUserPhoto = (photos) => ({
+    type: SET_USER_PHOTO,
+    photos
+})
 
-export const getUserProfile = (userId)=>{
-    return (dispatch) =>{
-        usersAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data))
-            })
+// export const updateProfileInformation = (payload) => ({
+//     type: UPDATE_PROFILE_INFORMATION,
+//     payload: {
+//         aboutMe: payload.aboutMe,
+//         lookingForAJobDescription: payload.lookingForAJobDescription,
+//         fullName: payload.fullName,
+//         lookingForAJob: payload.lookingForAJob,
+//     }
+// })
+export const toggleIsDone = (isDone) => {
+    return {
+        type: TOGGLE_IS_DONE,
+        isDone
     }
 }
-export const getUserStatus = (userId)=>{
-    return (dispatch) =>{
-        profileAPI.getStatus(userId)
-            .then(response => {
 
-                dispatch(setUserStatus(response.data))
-            })
+export const getUserProfile = (userId) => {
+    return async (dispatch) => {
+        let response = await profileAPI.getProfile(userId)
+        dispatch(setUserProfile(response.data))
     }
 }
-export const updateStatus = (status)=>{
-    return (dispatch) =>{
-        profileAPI.updateStatus(status)
-            .then(response => {
-                debugger
-                if(response.data.resultCode === 0) {
-                    dispatch(setUserStatus(status))
-                }
-            })
+export const getUserStatus = (userId) => {
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setUserStatus(response.data))
     }
-
 }
-
+export const updateStatus = (status) => {
+    return async (dispatch) => {
+        let response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+        }
+    }
+}
+export const setProfileInformation = (data) => {
+    return async (dispatch,getState) => {
+        dispatch(toggleIsDone(true))
+        let userId = getState().auth.userId
+        let response = await profileAPI.updateProfile(data)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserProfile(userId))
+            dispatch(toggleIsDone(false))
+        }
+    }
+}
+export const SavePhoto = (file) => {
+    return async (dispatch) => {
+        let response = await profileAPI.updatePhoto(file)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserPhoto(response.data.data.photos))
+        }
+    }
+}
 
 
 export default profileReducer;

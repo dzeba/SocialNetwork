@@ -5,10 +5,14 @@
   grid-template-areas:
   "h h"
   "n c";
-  grid-template-rows: 60px 1fr;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  line-height: 30px;
+
   grid-template-columns: 2fr 10fr;
+
 }
 .app_content{
   grid-area: c;
-  background-color: aquamarine;
+  background-color: white;
 }

@@ -1,6 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-let  initialState ={
+let initialState = {
     dialogs: [
         {
             id: 1,
@@ -43,7 +43,7 @@ let  initialState ={
 const dialogsReducer = (state = initialState, action) => {
 
 
-    switch (action.type){
+    switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
