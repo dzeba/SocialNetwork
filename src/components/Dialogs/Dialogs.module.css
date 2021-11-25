@@ -63,3 +63,23 @@
     height: 70px;
     margin-top: 20px;
 }
+.messageSettings{
+    width: 100px;
+    height: 100px;
+
+}
+.item{
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: solid transparent 2px;
+}
+.settingsBlock{
+    position: absolute;
+    left: 80%;
+}

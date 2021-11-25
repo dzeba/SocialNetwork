@@ -108,20 +108,20 @@ export const toggleFollowingProgress = (isFetching, userId) => {
 export const getUsersThunkCreator = (currentPage, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true))
-        let data = await usersAPI.getUsers(currentPage, pageSize)
+        let response = await usersAPI.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false))
-        dispatch(setUsers(data.items))
-        dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(setUsers(response.data.items))
+        dispatch(setTotalUsersCount(response.data.totalCount))
     }
 }
 export const onPageChangedThunkCreator = (pageNumber, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(pageNumber))
-        let data = await usersAPI.getUsers(pageNumber, pageSize)
+        let response = await usersAPI.getUsers(pageNumber, pageSize)
         dispatch(toggleIsFetching(false))
-        dispatch(setUsers(data.items))
-        dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(setUsers(response.data.items))
+        dispatch(setTotalUsersCount(response.data.totalCount))
     }
 }
 export const follow = (userId) => {

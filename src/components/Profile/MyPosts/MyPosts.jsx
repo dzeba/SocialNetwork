@@ -33,6 +33,7 @@ function MyPosts(props) {
         )
     const onSubmit = (values) => {
         props.addPost(values.postText)
+        values.postText = ''
     }
 
     return <div className={s.postsBlock}>
